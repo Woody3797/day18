@@ -21,7 +21,7 @@ public class RedisConfig {
     @Value("${spring.data.redis.port}")
     private Optional<Integer> redisPort;
 
-    @Value("${spring.data.redis.user}")
+    @Value("${spring.data.redis.username}")
     private String redisUsername;
 
     @Value("${spring.data.redis.password}")
