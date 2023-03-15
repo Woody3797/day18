@@ -20,6 +20,7 @@ public class Pizza implements Serializable{
     @Max(value = 10, message = "Too many pizzas!")
     private int quantity;
 
+
     public String getPizza() {
         return pizza;
     }
@@ -47,5 +48,4 @@ public class Pizza implements Serializable{
         return pizza;
     }
 
-    
 }

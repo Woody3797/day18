@@ -10,8 +10,6 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -23,7 +21,7 @@ public class RedisConfig {
     @Value("${spring.data.redis.port}")
     private Optional<Integer> redisPort;
 
-    @Value("${spring.data.redis.username}")
+    @Value("${spring.data.redis.user}")
     private String redisUsername;
 
     @Value("${spring.data.redis.password}")
@@ -49,8 +47,6 @@ public class RedisConfig {
         rt.setConnectionFactory(jedisFac);
         rt.setKeySerializer(new StringRedisSerializer());
         rt.setValueSerializer(new StringRedisSerializer());
-
-        System.out.println("redisHost > " + redisHost);
         return rt;
     }
 }

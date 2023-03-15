@@ -9,9 +9,14 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2022.ssf.day18.model.Delivery;
 import ibf2022.ssf.day18.model.Order;
@@ -40,6 +45,9 @@ public class PizzaService {
 
     private final Set<String> pizzaNames;
     private final Set<String> pizzaSizes;
+
+    @Value("${day18.pizza.api.url}")
+    private String restPizzaUrl;
 
     public PizzaService() {
         pizzaNames = new HashSet<>(Arrays.asList(PIZZA_NAMES));
@@ -113,5 +121,18 @@ public class PizzaService {
         }
 
         return errors;
+    }
+
+    public Optional<Order> getOrderDetails(String orderId) {
+        String url = UriComponentsBuilder.fromUriString(restPizzaUrl + orderId).toUriString();
+        RequestEntity request = RequestEntity.get(url).build();
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<String> response = template.exchange(request, String.class);
+        Order order = Order.create(response.getBody());
+        if (order == null) {
+            return Optional.empty();
+        }
+        return Optional.of(order);
     }
 }

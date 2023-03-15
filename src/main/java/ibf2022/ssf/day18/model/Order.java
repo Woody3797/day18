@@ -90,9 +90,9 @@ public class Order implements Serializable{
         .add("rush", this.getRush())
         .add("comments", this.getComments())
         .add("pizza", this.getPizzaName())
-        .add("size", this.getPizza().getSize())
-        .add("quantity", this.getPizza().getQuantity())
-        .add("totalCost", this.getTotalCost())
+        .add("size", this.getSize())
+        .add("quantity", this.getQuantity())
+        .add("total", this.getTotalCost())
         .build();
     }
 

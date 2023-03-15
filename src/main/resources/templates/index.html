@@ -63,6 +63,8 @@
 						<td>
 							<span th:errors="*{pizza}" th:errorclass="error"></span>
 						</td>
+					</tr>
+					<tr>
 						<td>Size:</td>
 						<td>
 							<select name="size" th:field="*{size}">
@@ -71,14 +73,17 @@
 								<option value="lg">Large</option>
 							</select>
 							<div th:if="${#fields.hasErrors('size')}">
-								<span th:errors="*{pizza}" th:errorclass="error"></span>
+								<span th:errors="*{size}" th:errorclass="error"></span>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>Quantity:</td>
 						<td>
-							<input type="number" min="1" name="quantity" th:field="*{quantity}"> 
+							<input type="number" min="1" name="quantity" th:field="*{quantity}">
+							<div th:if="${#fields.hasErrors('quantity')}">
+								<span th:errors="*{pizza}" th:errorclass="error"></span>
+							</div> 
 						</td>
 					</tr>
 					<tr>

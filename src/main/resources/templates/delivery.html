@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery</title>
+</head>
+<body>
+    <h1>Order Delivery Details</h1>
+    <form method="post" th:action="@{/pizza/order}" th:object="${delivery}">
+        <table>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input type="text" size="30" placeholder="Your Name" th:field="*{name}">
+                    <div th:if="${#fields.hasErrors('name')}">
+                        <span th:errors="*{name}" th:errorclass="error"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Address:
+                </td>
+                <td>
+                    <input type="text" size="30" placeholder="Your Address" th:field="*{address}">
+                    <div th:if="${#fields.hasErrors('address')}">
+                        <span th:errors="*{address}" th:errorclass="error"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Phone:
+                </td>
+                <td>
+                    <input type="tel" size="30" placeholder="Your Phone Number" th:field="*{phone}">
+                    <div th:if="${#fields.hasErrors('phone')}">
+                        <span th:errors="*{phone}" th:errorclass="error"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rush:
+                </td>
+                <td>
+                    <input type="checkbox" th:field="*{rush}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Comments:
+                </td>
+                <td>
+                    <textarea cols="30" rows="5" th:field="*{comments}" placeholder="comments"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" formmethod="get" formaction="/" >Cancel Order</button>
+                    <button type="submit">Place Order</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

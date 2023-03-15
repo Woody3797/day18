@@ -20,11 +20,12 @@ public class Delivery implements Serializable{
     private String address;
 
     @NotNull(message = "Must provide phone number")
-    @Pattern(regexp = "^(0-9)(8,)$", message = "Must be a valid phone number")
+    @Pattern(regexp = "^[0-9]{8,}$", message = "Must be a valid phone number")
     private String phone;
 
     private boolean rush = false;
     private String comments;
+
 
     public String getName() {
         return name;
