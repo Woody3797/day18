@@ -29,7 +29,7 @@ public class PizzaRestController {
             JsonObject error = Json.createObjectBuilder()
             .add("message", "order %s not found".formatted(orderId))
             .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.toString());
         }
         return ResponseEntity.ok(order.get().toJSON().toString());
     }
