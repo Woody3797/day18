@@ -3,13 +3,26 @@ package ibf2022.ssf.day18.model;
 import java.io.Serializable;
 
 import jakarta.json.JsonObject;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class Delivery implements Serializable{
     private static final long serialVersionUID=1L;
 
+    @NotNull(message = "Must provide a name")
+    @Size(min = 3, message = "Name cannot be less than 3 characters")
     private String name;
+
+    @NotNull(message = "Must provide an address")
+    @NotEmpty(message = "Must type an address")
     private String address;
+
+    @NotNull(message = "Must provide phone number")
+    @Pattern(regexp = "^(0-9)(8,)$", message = "Must be a valid phone number")
     private String phone;
+
     private boolean rush = false;
     private String comments;
 
