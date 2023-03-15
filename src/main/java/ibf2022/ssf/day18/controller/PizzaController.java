@@ -8,15 +8,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ibf2022.ssf.day18.model.Order;
+import ibf2022.ssf.day18.model.Pizza;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping(path = "/, /index")
+@RequestMapping(path = "/")
 public class PizzaController {
     
-    @GetMapping
-    public String goToLandingPage() {
+    @GetMapping(path = {"/", "/index.html"})
+    public String getIndex(Model model, HttpSession session) {
+        session.invalidate();
+        model.addAttribute("pizza", new Pizza());
         return "index";
     }
 

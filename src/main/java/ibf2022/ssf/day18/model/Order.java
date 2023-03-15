@@ -15,6 +15,11 @@ public class Order implements Serializable{
     private Pizza pizza;
     private Delivery delivery;
 
+    public Order(Pizza pizza, Delivery delivery) {
+        this.pizza = pizza;
+        this.delivery = delivery;
+    }
+
     public float getTotalCost() {
         return totalCost;
     }
@@ -40,22 +45,54 @@ public class Order implements Serializable{
         this.delivery = delivery;
     }
 
-    public static JsonObject create(String json) {
+    public String getName() {
+        return this.getDelivery().getName(); }
+    public String getPizzaName() {
+        return this.getPizza().getPizza(); }
+    public String getAddress() {
+        return this.getDelivery().getAddress(); }
+    public String getPhone() {
+        return this.getDelivery().getPhone(); }
+    public boolean getRush() {
+        return this.getDelivery().isRush(); }
+    public String getComments() {
+        return this.getDelivery().getComments(); }
+    public String getSize() {
+        return this.getPizza().getSize(); }
+    public int getQuantity() {
+        return this.getPizza().getQuantity(); }
+
+    public float getPizzaCost() {
+        return this.getRush() ? this.getTotalCost() - 2 : this.getTotalCost();
+    }
+
+    public static JsonObject toJSON(String json) {
         JsonReader jr = Json.createReader(new StringReader(json));
         return jr.readObject();
+    }
+
+    public static Order create(String json) {
+        JsonObject obj = toJSON(json);
+        Pizza pizza = Pizza.create(obj);
+        Delivery delivery = Delivery.create(obj);
+        Order order = new Order(pizza, delivery);
+        order.setOrderId(obj.getString("orderId"));
+        order.setTotalCost((float) obj.getJsonNumber("total").doubleValue());
+        return order;
     }
 
     public JsonObject toJSON() {
         return Json.createObjectBuilder()
         .add("orderId", orderId)
-        .add("name", this.getDelivery().getName())
-        .add("address", this.getDelivery().getAddress())
-        .add("phone", this.getDelivery().getPhone())
-        .add("rush", this.getDelivery().isRush())
-        .add("comments", this.getDelivery().getComments())
-        .add("pizza", this.getPizza().getPizza())
+        .add("name", this.getName())
+        .add("address", this.getAddress())
+        .add("phone", this.getPhone())
+        .add("rush", this.getRush())
+        .add("comments", this.getComments())
+        .add("pizza", this.getPizzaName())
         .add("size", this.getPizza().getSize())
         .add("quantity", this.getPizza().getQuantity())
+        .add("totalCost", this.getTotalCost())
         .build();
     }
 
