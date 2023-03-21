@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body th:object="${order}">
+<body th:object="${order}" style="background-color: rgb(149, 149, 149);">
     <h1>Delivery Details</h1>
     <table>
         <tr>
@@ -30,5 +30,11 @@
             <td><span th:text="*{totalCost}"></span></td>
         </tr>
     </table>
+    <br>
+    <div>
+        <form action="/" method="get">
+            <button>Back to order form</button>
+        </form>
+    </div>
 </body>
 </html>

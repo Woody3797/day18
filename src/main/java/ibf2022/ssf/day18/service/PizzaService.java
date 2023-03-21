@@ -126,7 +126,6 @@ public class PizzaService {
     public Optional<Order> getOrderDetails(String orderId) {
         String url = UriComponentsBuilder.fromUriString(restPizzaUrl + orderId).toUriString();
         RequestEntity<Void> request = RequestEntity.get(url).build();
-
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> response = template.exchange(request, String.class);
         Order order = Order.create(response.getBody());

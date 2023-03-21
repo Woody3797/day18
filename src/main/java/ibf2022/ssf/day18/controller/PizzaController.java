@@ -25,7 +25,7 @@ public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
 
-    @GetMapping(path = {"/", "/index.html"})
+    @GetMapping(path = {"/", "/index.html", "/index"})
     public String getIndex(Model model, HttpSession session) {
         session.invalidate();
         model.addAttribute("pizza", new Pizza());
@@ -37,7 +37,6 @@ public class PizzaController {
         if (bindings.hasErrors()) {
             return "index";
         }
-
         List<ObjectError> errors = pizzaService.validatePizzaOrder(pizza);
         if (!errors.isEmpty()) {
             for (ObjectError error : errors) {
@@ -55,7 +54,6 @@ public class PizzaController {
         if (bindings.hasErrors()) {
             return "delivery";
         }
-
         Pizza pizza = (Pizza) session.getAttribute("pizza");
         Order order = pizzaService.savePizzaOrder(pizza, delivery);
         model.addAttribute("order", order);

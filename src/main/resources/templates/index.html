@@ -6,8 +6,7 @@
 		<title>Panucci's Pizza</title>
 		<link rel="stylesheet" href="/styles.css">
 	</head>
-	<body>
-
+	<body style="background-color: rgb(149, 149, 149);">
 		<div class="title">
 			<div><img src="/images/logo.jpg" class="thumbnail"></div>
 			<h2>Panucci's Pizza</h2>
@@ -82,7 +81,7 @@
 						<td>
 							<input type="number" min="1" name="quantity" th:field="*{quantity}">
 							<div th:if="${#fields.hasErrors('quantity')}">
-								<span th:errors="*{pizza}" th:errorclass="error"></span>
+								<span th:errors="*{quantity}" th:errorclass="error"></span>
 							</div> 
 						</td>
 					</tr>
